@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}
+Study Materials
+{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+  <h2 class="text-center mb-4">Study Materials</h2>
+
+  {% set categories = ['Introduction to Software Systems', 'Discreet Mathematics', 'Physics', 'Political Science', 'History', 'Art'] %}
+
+  <div class="accordion" id="materialsAccordion">
+    {% for category in categories %}
+      <div class="card mb-2">
+        <div class="card-header" id="heading{{ loop.index }}">
+          <h5 class="mb-0">
+            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse{{ loop.index }}" aria-expanded="true" aria-controls="collapse{{ loop.index }}">
+              {{ category }}
+            </button>
+          </h5>
+        </div>
+
+        <div id="collapse{{ loop.index }}" class="collapse" aria-labelledby="heading{{ loop.index }}" data-parent="#materialsAccordion">
+          <div class="card-body">
+            <ul class="list-group">
+              {% for material in materials %}
+                {% if material.category == category %}
+                  <li class="list-group-item d-flex justify-content-between align-items-center">
+                    {{ material.filename }}
+                    <a href="{{ url_for('static', filename='uploads/' + material.filename) }}" class="btn btn-sm btn-success" download>Download</a>
+                  </li>
+                {% endif %}
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+
+</div>
+{% endblock %}

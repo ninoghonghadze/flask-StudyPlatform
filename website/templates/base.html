@@ -11,10 +11,16 @@
     crossorigin="anonymous"
   >
 
+  <!-- Font Awesome -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    crossorigin="anonymous"
+  >
+
   <!-- Google Font -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
 
-  <!-- Custom CSS -->
   <style>
     body {
       font-family: 'Poppins', sans-serif;
@@ -22,6 +28,7 @@
       background-size: cover;
       min-height: 100vh;
     }
+
     .navbar {
       background-color: #006400 !important;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -39,9 +46,8 @@
       transition: 0.2s;
     }
 
-    /* Custom Edit and Delete Buttons */
     .btn-edit {
-      background-color:hsl(122, 36.20%, 41.80%); /* Medium Green */
+      background-color: hsl(122, 36.20%, 41.80%);
       color: white;
       border: none;
     }
@@ -53,7 +59,7 @@
     }
 
     .btn-delete {
-      background-color: rgba(59, 85, 7, 0.55); /* Olive Green */
+      background-color: rgba(59, 85, 7, 0.55);
       color: white;
       border: none;
     }
@@ -70,13 +76,13 @@
       border-radius: 6px;
       margin-bottom: 10px;
     }
-    
+
     h2 {
       font-weight: 700;
       font-size: 1.8rem;
       animation: slideIn 0.6s ease-out;
     }
-    
+
     @keyframes slideIn {
       0% {
         transform: translateY(-10px);
@@ -87,10 +93,11 @@
         opacity: 1;
       }
     }
-        .container {
+
+    .container {
       margin-top: 40px;
       padding: 30px;
-      background-color: rgba(255, 255, 255, 0.75);  /* 80% white */
+      background-color: rgba(255, 255, 255, 0.75);
       border-radius: 10px;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
     }
@@ -101,9 +108,8 @@
     }
   </style>
 
-  <!-- Flash Auto-hide Only -->
+  <!-- Flash auto-hide -->
   <script>
-    // Auto-dismiss flash messages after 2.5 seconds
     setTimeout(function () {
       const alerts = document.querySelectorAll('.alert');
       alerts.forEach(alert => {
@@ -117,7 +123,6 @@
 </head>
 
 <body>
-
   <!-- Navbar -->
   <nav class="navbar navbar-expand-lg navbar-dark">
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar">
@@ -129,6 +134,11 @@
           <a class="nav-item nav-link {% if active == 'home' %}active{% endif %}" href="/">Home</a>
           <a class="nav-item nav-link {% if active == 'upload' %}active{% endif %}" href="/upload">Upload Material</a>
           <a class="nav-item nav-link {% if active == 'materials' %}active{% endif %}" href="/materials">View Materials</a>
+          {% if user.email == 'nghonghadze07@gmail.com' %}
+            <a class="nav-item nav-link" href="/admin">
+              <i class="fas fa-user-shield"></i> Admin Panel
+            </a>
+          {% endif %}
           <a class="nav-item nav-link" href="/logout">Logout</a>
         {% else %}
           <a class="nav-item nav-link" href="/login">Login</a>
@@ -140,19 +150,20 @@
 
   <!-- Flash Messages -->
   {% with messages = get_flashed_messages(with_categories=true) %}
-  {% if messages %}
-    {% for category, message in messages %}
-      <div class="alert alert-{{ 'danger' if category == 'error' else 'success' }} text-center my-0" style="margin-bottom: 0;">
-        {{ message | trim }}
-      </div>
-    {% endfor %}
-  {% endif %}
-{% endwith %}
+    {% if messages %}
+      {% for category, message in messages %}
+       <div class="alert alert-{{ 'danger' if category == 'error' else 'success' }} text-center my-0" style="margin-bottom: 0;">
+        {{ message | safe }}
+       </div>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
 
   <!-- Page content -->
   <div class="container">
     {% block content %}{% endblock %}
   </div>
+
   <!-- Bootstrap JS -->
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" crossorigin="anonymous"></script>

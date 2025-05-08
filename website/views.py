@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, request, flash, redirect, url_for
 from flask_login import login_required, current_user
 import os
-from .models import Material, Note, Reply
+from .models import User, Material, Note, Reply
 from . import db
 
 views = Blueprint('views', __name__)
@@ -115,3 +115,54 @@ def materials():
     materials = Material.query.all()
     return render_template("materials.html", materials=materials, user=current_user)
 
+@views.route('/admin')
+@login_required
+def admin_panel():
+    if current_user.email != "nghonghadze07@gmail.com":
+        flash("Access denied: Admins only.", category="error")
+        return redirect(url_for('views.home'))
+    
+    users = User.query.all()
+    materials = Material.query.all()
+    notes = Note.query.all()
+    return render_template("admin.html", users=users, materials=materials, notes=notes, user=current_user)
+
+@views.route('/delete-user/<int:id>', methods=['POST'])
+@login_required
+def delete_user(id):
+    if current_user.email != "nghonghadze07@gmail.com":
+        flash("Admins only.", category="error")
+        return redirect(url_for('views.admin_panel'))
+
+    user = User.query.get_or_404(id)
+    db.session.delete(user)
+    db.session.commit()
+    flash("User deleted.", category="success")
+    return redirect(url_for('views.admin_panel'))
+
+
+@views.route('/delete-material/<int:id>', methods=['POST'])
+@login_required
+def delete_material(id):
+    if current_user.email != "nghonghadze07@gmail.com":
+        flash("Admins only.", category="error")
+        return redirect(url_for('views.admin_panel'))
+
+    material = Material.query.get_or_404(id)
+    db.session.delete(material)
+    db.session.commit()
+    flash("Material deleted.", category="success")
+    return redirect(url_for('views.admin_panel'))
+
+@views.route('/delete-note-admin/<int:id>', methods=['POST'])
+@login_required
+def delete_note_admin(id):
+    if current_user.email != "nghonghadze07@gmail.com":
+        flash("Admins only.", category="error")
+        return redirect(url_for('views.admin_panel'))
+
+    note = Note.query.get_or_404(id)
+    db.session.delete(note)
+    db.session.commit()
+    flash("Note deleted.", category="success")
+    return redirect(url_for('views.admin_panel'))

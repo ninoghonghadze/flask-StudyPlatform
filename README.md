@@ -52,8 +52,6 @@ Ensure Docker Desktop with WSL integration is running, then:
 bash
 docker-compose up --build
 
-Access the app at `http://localhost:5000/login`.
-
 ## 🖱 How to Use
 *Register/Login: Create an account or log in.
 *Upload Materials: Use the "Upload Material" page.

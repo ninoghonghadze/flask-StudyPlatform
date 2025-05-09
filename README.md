@@ -52,7 +52,7 @@ Ensure Docker Desktop with WSL integration is running, then:
 bash
 docker-compose up --build
 
-## 🖱 How to Use
+🖱 How to Use
 *Register/Login: Create an account or log in.
 *Upload Materials: Use the "Upload Material" page.
 *Post Notes: Share your study notes or requests from the home page.

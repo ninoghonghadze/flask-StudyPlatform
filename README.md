@@ -44,8 +44,8 @@ main.py
 🔧 Installation and Setup
 📌 Step 1: Clone the repository
 bash
-git clone https://github.com/yourusername/flask-study-platform.git
-cd flask-study-platform
+git clone https://github.com/ninoghonghadze/flask-StudyPlatform.git
+cd flask-StudyPlatform
 
 📌 Step 2: Run with Docker
 Ensure Docker Desktop with WSL integration is running, then:

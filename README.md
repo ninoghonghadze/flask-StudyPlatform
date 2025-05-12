@@ -5,20 +5,27 @@ Flask Study Platform is a web application built using Flask, Docker, and WSL. It
 textbooks, and practice exams. Users can securely register, log in, upload study resources, post and reply to study notes, and mark requests as completed. 
 An administrative panel allows efficient management of users, materials, and notes.
 
+-----------------------------------------
 ✨ Features
-*User Authentication: Secure registration, login, and logout.
-*Material Upload: Easily upload and categorize study materials.
-*Note Posting & Reply: Post study requests or notes, reply to others, and mark notes as completed.
-*Admin Panel: Manage users, materials, and notes efficiently.
-*Password Reset: Users can reset forgotten passwords securely.
 
-🛠 Technologies Used
-*Flask:A Python microframework used for building the web app.
-*Docker: Containerizes the app for consistent environments.
-*WSL (Windows Subsystem for Linux): Enables a Linux development environment on Windows.
-*Bootstrap: For responsive UI and sleek styling.
-*SQLAlchemy: Database interactions with SQLite.
+🔐 User authentication (Sign up, login, logout)
+📝 Post notes to request study materials
+📂 Upload and categorize study materials
+💬 Reply to classmates' notes
+✅ Mark "requests" as fulfilled
+🛠 Admin panel to manage users, notes, and uploads
 
+-----------------------------------------
+📦 Technologies Used
+
+🐍 Python 3.12
+🔥 Flask
+🐬 SQLite (with SQLAlchemy ORM)
+🐳 Docker & Docker Compose
+🖼 HTML/CSS (Bootstrap), JavaScript
+💻 WSL2 for development on Window
+
+-----------------------------------------
 📂 Project Structure
 website/
 ├── static/
@@ -41,17 +48,41 @@ docker-compose.yml
 requirements.txt
 main.py
 
-🔧 Installation and Setup
-📌 Step 1: Clone the repository
-bash
+------------------------------------------
+🔧 Installation
+
+1. ✅ Make sure Docker Desktop with WSL2 integration is enabled
+2. 📁 Clone the repository:
+
 git clone https://github.com/ninoghonghadze/flask-StudyPlatform.git
 cd flask-StudyPlatform
 
-📌 Step 2: Run with Docker
-Ensure Docker Desktop with WSL integration is running, then:
-bash
+3. 🐳 Build and run the application:
+
 docker-compose up --build
 
+4. 🔗 Access the application at:
+
+http://localhost:5000
+
+-----------------------------------------
+👥 User Roles
+
+Student can:
+
+Sign up, log in/out
+Post notes (requests)
+Upload & categorize study materials
+Reply to notes
+Edit/delete own notes
+
+Admin can:
+
+Everything students can do ✅
+View/delete users, materials, and all notes
+Access a dedicated /admin panel
+
+-----------------------------------------
 🖱 How to Use
 *Register/Login: Create an account or log in.
 *Upload Materials: Use the "Upload Material" page.
@@ -74,7 +105,7 @@ docker-compose up --build
 🛡 Admin Panel
 [Admin Panel](static/images/screenshot_admin.png)
 
-
+-----------------------------------------
 🙌 Credits
 Nino Ghonghadze: Project developer & maintainer. [GitHub](https://github.com/ninoghonghadze)
 
